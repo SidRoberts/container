@@ -2,6 +2,8 @@
 
 namespace Sid\Container;
 
+use Sid\Container\Exception\ServiceNotFoundException;
+
 class Container
 {
     /**
@@ -18,9 +20,22 @@ class Container
 
     public function __get(string $name)
     {
-        if (!isset($this->services[$name])) {
+        if (!$this->has($name)) {
             return null;
         }
+
+        return $this->get($name);
+    }
+
+
+
+    public function get(string $name)
+    {
+        if (!isset($this->services[$name])) {
+            throw new ServiceNotFoundException($name);
+        }
+
+
 
         if (isset($this->sharedServices[$name])) {
             return $this->sharedServices[$name];

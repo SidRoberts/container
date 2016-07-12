@@ -35,6 +35,36 @@ class ContainerTest extends \Codeception\TestCase\Test
             "hello",
             $container->hello
         );
+
+
+
+        $this->assertEquals(
+            "hello",
+            $container->get("hello")
+        );
+    }
+
+
+
+    public function testServiceDoesntExist()
+    {
+        $container = new Container();
+
+
+
+        $this->assertNull(
+            $container->serviceThatDoesntExist
+        );
+
+
+
+        try {
+            $container->get("serviceThatDoesntExist");
+
+            $this->assertTrue(false);
+        } catch (\Sid\Container\Exception\ServiceNotFoundException $e) {
+            $this->assertTrue(true);
+        }
     }
 
 
