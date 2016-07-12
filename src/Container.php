@@ -2,6 +2,8 @@
 
 namespace Sid\Container;
 
+use ReflectionMethod;
+
 use Sid\Container\Exception\ServiceNotFoundException;
 
 class Container
@@ -43,7 +45,7 @@ class Container
 
         $service = $this->services[$name];
 
-        $resolvedService = $service->resolve($this);
+        $resolvedService = $this->typehint($service);
 
         if ($service->isShared()) {
             $this->sharedServices[$name] = $resolvedService;
@@ -68,5 +70,38 @@ class Container
     public function has(string $name) : bool
     {
         return isset($this->services[$name]);
+    }
+
+
+
+    protected function typehint(Service $service)
+    {
+        $serviceClass = get_class($service);
+
+        $reflectionMethod = new ReflectionMethod($serviceClass, "resolve");
+
+        $reflectionParameters = $reflectionMethod->getParameters();
+
+        $params = [];
+
+        foreach ($reflectionParameters as $reflectionParameter) {
+            $serviceName = $reflectionParameter->getName();
+
+            if ($serviceName === "container") {
+                $paramService = $this;
+            } else {
+                $paramService = $this->get($serviceName);
+            }
+
+            $params[] = $paramService;
+        }
+
+        return call_user_func_array(
+            [
+                $service,
+                "resolve"
+            ],
+            $params
+        );
     }
 }

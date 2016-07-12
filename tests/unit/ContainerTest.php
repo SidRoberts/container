@@ -221,4 +221,26 @@ class ContainerTest extends \Codeception\TestCase\Test
             $container->example
         );
     }
+
+
+
+    public function testTypeHintedResolver()
+    {
+        $container = new Container();
+
+        $container->add(
+            new \Services\TypeHintedResolver()
+        );
+
+        $container->add(
+            new \Services\Parameter("Sid")
+        );
+
+
+
+        $this->assertEquals(
+            "The 'parameter' service says: Hello Sid",
+            $container->typeHintedResolver
+        );
+    }
 }
