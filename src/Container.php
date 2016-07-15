@@ -29,19 +29,24 @@ class Container
         return $this->get($name);
     }
 
+    public function __set(string $name, $value)
+    {
+        $this->set($name, $value);
+    }
+
 
 
     public function get(string $name)
     {
+        if (isset($this->sharedServices[$name])) {
+            return $this->sharedServices[$name];
+        }
+
         if (!isset($this->services[$name])) {
             throw new ServiceNotFoundException($name);
         }
 
 
-
-        if (isset($this->sharedServices[$name])) {
-            return $this->sharedServices[$name];
-        }
 
         $service = $this->services[$name];
 
@@ -52,6 +57,11 @@ class Container
         }
 
         return $resolvedService;
+    }
+
+    public function set(string $name, $value)
+    {
+        $this->sharedServices[$name] = $value;
     }
 
 
@@ -69,7 +79,7 @@ class Container
 
     public function has(string $name) : bool
     {
-        return isset($this->services[$name]);
+        return isset($this->services[$name]) || isset($this->sharedServices[$name]);
     }
 
 
