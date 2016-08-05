@@ -2,6 +2,7 @@
 
 namespace Sid\Container;
 
+use ReflectionClass;
 use ReflectionMethod;
 
 use Sid\Container\Exception\ServiceNotFoundException;
@@ -84,12 +85,44 @@ class Container
 
 
 
+    public function typehintClass(string $className)
+    {
+        $reflectionClass = new ReflectionClass($className);
+
+        $params = [];
+
+        if ($reflectionClass->hasMethod("__construct")) {
+            $reflectionMethod = $reflectionClass->getMethod("__construct");
+
+            $params = $this->resolveParams($reflectionMethod);
+        }
+
+        return $reflectionClass->newInstanceArgs($params);
+    }
+
+
+
     public function typehintService(Service $service)
     {
         $serviceClass = get_class($service);
 
         $reflectionMethod = new ReflectionMethod($serviceClass, "resolve");
 
+        $params = $this->resolveParams($reflectionMethod);
+
+        return call_user_func_array(
+            [
+                $service,
+                "resolve"
+            ],
+            $params
+        );
+    }
+
+
+
+    protected function resolveParams(ReflectionMethod $reflectionMethod)
+    {
         $reflectionParameters = $reflectionMethod->getParameters();
 
         $params = [];
@@ -106,12 +139,6 @@ class Container
             $params[] = $paramService;
         }
 
-        return call_user_func_array(
-            [
-                $service,
-                "resolve"
-            ],
-            $params
-        );
+        return $params;
     }
 }
