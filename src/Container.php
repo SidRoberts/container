@@ -50,7 +50,7 @@ class Container
 
         $service = $this->services[$name];
 
-        $resolvedService = $this->typehint($service);
+        $resolvedService = $this->typehintService($service);
 
         if ($service->isShared()) {
             $this->sharedServices[$name] = $resolvedService;
@@ -84,7 +84,7 @@ class Container
 
 
 
-    protected function typehint(Service $service)
+    public function typehintService(Service $service)
     {
         $serviceClass = get_class($service);
 
