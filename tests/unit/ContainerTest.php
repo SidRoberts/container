@@ -204,7 +204,7 @@ class ContainerTest extends \Codeception\TestCase\Test
             new \Sid\Container\RawService(
                 "example",
                 true,
-                function (\Sid\Container\Container $container) {
+                function (Container $container) {
                     return "hello";
                 }
             )
