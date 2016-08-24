@@ -102,21 +102,28 @@ class Container
 
 
 
-    public function typehintService(Service $service)
+    public function typehintMethod($class, string $method)
     {
-        $serviceClass = get_class($service);
+        $className = get_class($class);
 
-        $reflectionMethod = new ReflectionMethod($serviceClass, "resolve");
+        $reflectionMethod = new ReflectionMethod($className, $method);
 
         $params = $this->resolveParams($reflectionMethod);
 
         return call_user_func_array(
             [
-                $service,
-                "resolve"
+                $class,
+                $method
             ],
             $params
         );
+    }
+
+
+
+    public function typehintService(Service $service)
+    {
+        return $this->typehintMethod($service, "resolve");
     }
 
 
