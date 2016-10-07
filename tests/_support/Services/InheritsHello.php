@@ -16,8 +16,8 @@ class InheritsHello extends \Sid\Container\Service
         return true;
     }
 
-    public function resolve(Container $container)
+    public function resolve($hello)
     {
-        return $container->hello;
+        return $hello;
     }
 }

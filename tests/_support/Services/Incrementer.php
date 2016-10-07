@@ -27,7 +27,7 @@ class Incrementer extends \Sid\Container\Service
         return $this->isShared;
     }
 
-    public function resolve(Container $container)
+    public function resolve()
     {
         $incrementer = new \Incrementer();
 

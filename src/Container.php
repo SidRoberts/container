@@ -21,22 +21,6 @@ class Container
 
 
 
-    public function __get(string $name)
-    {
-        if (!$this->has($name)) {
-            return null;
-        }
-
-        return $this->get($name);
-    }
-
-    public function __set(string $name, $value)
-    {
-        $this->set($name, $value);
-    }
-
-
-
     public function get(string $name)
     {
         if (isset($this->sharedServices[$name])) {

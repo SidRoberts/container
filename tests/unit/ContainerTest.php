@@ -33,38 +33,20 @@ class ContainerTest extends \Codeception\TestCase\Test
 
         $this->assertEquals(
             "hello",
-            $container->hello
-        );
-
-
-
-        $this->assertEquals(
-            "hello",
             $container->get("hello")
         );
     }
 
 
 
+    /**
+     * @expectedException Sid\Container\Exception\ServiceNotFoundException
+     */
     public function testServiceDoesntExist()
     {
         $container = new Container();
 
-
-
-        $this->assertNull(
-            $container->serviceThatDoesntExist
-        );
-
-
-
-        try {
-            $container->get("serviceThatDoesntExist");
-
-            $this->assertTrue(false);
-        } catch (\Sid\Container\Exception\ServiceNotFoundException $e) {
-            $this->assertTrue(true);
-        }
+        $container->get("serviceThatDoesntExist");
     }
 
 
@@ -85,12 +67,12 @@ class ContainerTest extends \Codeception\TestCase\Test
 
         $this->assertEquals(
             "hello",
-            $container->hello
+            $container->get("hello")
         );
 
         $this->assertEquals(
             "hello",
-            $container->inheritsHello
+            $container->get("inheritsHello")
         );
     }
 
@@ -108,7 +90,7 @@ class ContainerTest extends \Codeception\TestCase\Test
 
         $this->assertEquals(
             "Hello Sid",
-            $container->parameter
+            $container->get("parameter")
         );
     }
 
@@ -135,17 +117,6 @@ class ContainerTest extends \Codeception\TestCase\Test
 
 
 
-    public function testNonexistentPropertyReturnsNull()
-    {
-        $container = new Container();
-
-        $this->assertNull(
-            $container->doesntExist
-        );
-    }
-
-
-
     public function testSingleton()
     {
         $container = new Container();
@@ -158,14 +129,14 @@ class ContainerTest extends \Codeception\TestCase\Test
 
         $this->assertEquals(
             0,
-            $container->incrementer->getI()
+            $container->get("incrementer")->getI()
         );
 
-        $container->incrementer->increment();
+        $container->get("incrementer")->increment();
 
         $this->assertEquals(
             0,
-            $container->incrementer->getI()
+            $container->get("incrementer")->getI()
         );
     }
 
@@ -183,14 +154,14 @@ class ContainerTest extends \Codeception\TestCase\Test
 
         $this->assertEquals(
             0,
-            $container->incrementer->getI()
+            $container->get("incrementer")->getI()
         );
 
-        $container->incrementer->increment();
+        $container->get("incrementer")->increment();
 
         $this->assertEquals(
             1,
-            $container->incrementer->getI()
+            $container->get("incrementer")->getI()
         );
     }
 
@@ -218,7 +189,7 @@ class ContainerTest extends \Codeception\TestCase\Test
 
         $this->assertEquals(
             "hello",
-            $container->example
+            $container->get("example")
         );
     }
 
@@ -240,7 +211,7 @@ class ContainerTest extends \Codeception\TestCase\Test
 
         $this->assertEquals(
             "The 'parameter' service says: Hello Sid",
-            $container->typeHintedResolver
+            $container->get("typeHintedResolver")
         );
     }
 }

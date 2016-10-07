@@ -16,7 +16,7 @@ class Hello extends \Sid\Container\Service
         return true;
     }
 
-    public function resolve(Container $container)
+    public function resolve()
     {
         return "hello";
     }
