@@ -19,6 +19,25 @@ class Container
      */
     protected $sharedServices = [];
 
+    /**
+     * @var Resolver
+     */
+    protected $resolver;
+
+
+
+    public function __construct()
+    {
+        $this->resolver = new Resolver($this);
+    }
+
+
+
+    public function getResolver() : Resolver
+    {
+        return $this->resolver;
+    }
+
 
 
     public function get(string $name)
@@ -35,7 +54,7 @@ class Container
 
         $service = $this->services[$name];
 
-        $resolvedService = $this->typehintService($service);
+        $resolvedService = $this->resolver->typehintService($service);
 
         if ($service->isShared()) {
             $this->sharedServices[$name] = $resolvedService;
@@ -65,71 +84,5 @@ class Container
     public function has(string $name) : bool
     {
         return isset($this->services[$name]) || isset($this->sharedServices[$name]);
-    }
-
-
-
-    public function typehintClass(string $className)
-    {
-        $reflectionClass = new ReflectionClass($className);
-
-        $params = [];
-
-        if ($reflectionClass->hasMethod("__construct")) {
-            $reflectionMethod = $reflectionClass->getMethod("__construct");
-
-            $params = $this->resolveParams($reflectionMethod);
-        }
-
-        return $reflectionClass->newInstanceArgs($params);
-    }
-
-
-
-    public function typehintMethod($class, string $method)
-    {
-        $className = get_class($class);
-
-        $reflectionMethod = new ReflectionMethod($className, $method);
-
-        $params = $this->resolveParams($reflectionMethod);
-
-        return call_user_func_array(
-            [
-                $class,
-                $method
-            ],
-            $params
-        );
-    }
-
-
-
-    public function typehintService(Service $service)
-    {
-        return $this->typehintMethod($service, "resolve");
-    }
-
-
-
-    protected function resolveParams(ReflectionMethod $reflectionMethod)
-    {
-        $reflectionParameters = $reflectionMethod->getParameters();
-
-        $params = [];
-
-        foreach ($reflectionParameters as $reflectionParameter) {
-            $serviceName = $reflectionParameter->getName();
-
-            if ($serviceName === "container") {
-                $paramService = $this;
-            } else {
-                $paramService = $this->get($serviceName);
-            }
-
-            $params[] = $paramService;
-        }
-
-        return $params;
     }
 }
