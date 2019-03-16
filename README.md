@@ -63,7 +63,9 @@ Service classes have 3 methods:
 
 * `resolve()` is where you can actually write your service code.
 
-A service may depend on another service in order to function. By using the names from `getName()`, you can access other services via the `resolve()` method's parameters  Here, we'll create another service that requires the 'config' service:
+A service may depend on another service in order to function.
+By using the names from `getName()`, you can access other services via the `resolve()` method's parameters.
+Here, we'll create another service that requires the 'config' service:
 
 ```php
 namespace MyApp\Service;
@@ -96,7 +98,8 @@ class PheanstalkService extends Service
 }
 ```
 
-The example above has used typehinting to ensure that `$config` is an instance of `Zend\Config\Config`. This isn't necessary but it's for useful for IDE autocompletion and may help uncover possible bugs earlier.
+The example above has used typehinting to ensure that `$config` is an instance of `Zend\Config\Config`.
+This isn't necessary but it's for useful for IDE autocompletion and may help uncover possible bugs earlier.
 
 Now we need to add these service classes to the container:
 
@@ -124,7 +127,8 @@ $pheanstalk = $container->get("pheanstalk");
 
 The container will handle all of the dependencies and either return the same instance or create a fresh instance depending on whether the service is shared or not.
 
-If a service does not exist, `get()` will throw a `Sid\Container\Exception\ServiceNotFoundException`. You can also check if a service exists using `has()` which will return a boolean:
+If a service does not exist, `get()` will throw a `Sid\Container\Exception\ServiceNotFoundException`.
+You can also check if a service exists using `has()` which will return a boolean:
 
 ```php
 $container->has("myService");
