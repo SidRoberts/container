@@ -101,14 +101,18 @@ The example above has used typehinting to ensure that `$config` is an instance o
 Now we need to add these service classes to the container:
 
 ```php
-$container = new \Sid\Container\Container();
+use MyApp\Service\ConfigService;
+use MyApp\Service\PheanstalkService;
+use Sid\Container\Container;
+
+$container = new Container();
 
 $container->add(
-    new \MyApp\Service\ConfigService()
+    new ConfigService()
 );
 
 $container->add(
-    new \MyApp\Service\PheanstalkService()
+    new PheanstalkService()
 );
 ```
 
