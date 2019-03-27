@@ -2,10 +2,11 @@
 
 namespace Sid\Container\Tests\Unit;
 
+use Codeception\TestCase\Test;
 use Sid\Container\Container;
 use Sid\Container\Resolver;
 
-class ResolverTest extends \Codeception\TestCase\Test
+class ResolverTest extends Test
 {
     public function testTypehintClass()
     {

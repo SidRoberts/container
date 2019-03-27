@@ -2,9 +2,10 @@
 
 namespace Sid\Container\Tests\Unit;
 
+use Codeception\TestCase\Test;
 use Sid\Container\Container;
 
-class ContainerTest extends \Codeception\TestCase\Test
+class ContainerTest extends Test
 {
     public function testBasic()
     {
