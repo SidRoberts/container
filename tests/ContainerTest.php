@@ -6,16 +6,6 @@ use Sid\Container\Container;
 
 class ContainerTest extends \Codeception\TestCase\Test
 {
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
-
-
-
     public function testBasic()
     {
         $container = new Container();
