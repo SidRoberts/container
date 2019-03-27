@@ -2,8 +2,13 @@
 
 A simple and easy dependency container.
 
-[![Build Status](https://travis-ci.org/SidRoberts/container.svg?branch=master)](https://travis-ci.org/SidRoberts/container)
-[![GitHub tag](https://img.shields.io/github/tag/sidroberts/container.svg?maxAge=2592000)]()
+[![Build Status](https://img.shields.io/travis/SidRoberts/container/4.0.x.svg?style=for-the-badge)](https://travis-ci.org/SidRoberts/container)
+[![GitHub release](https://img.shields.io/github/release/SidRoberts/container.svg?style=for-the-badge)]()
+
+[![License](https://img.shields.io/github/license/SidRoberts/container.svg?style=for-the-badge)]()
+
+[![GitHub issues](https://img.shields.io/github/issues-raw/SidRoberts/container.svg?style=for-the-badge)]()
+[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/SidRoberts/container.svg?style=for-the-badge)]()
 
 
 
