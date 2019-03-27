@@ -7,21 +7,6 @@ use Sid\Container\Resolver;
 
 class ResolverTest extends \Codeception\TestCase\Test
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
-
-
-
     public function testTypehintClass()
     {
         $container = new Container();
