@@ -7,8 +7,8 @@ A simple and easy dependency container.
 
 [![License](https://img.shields.io/github/license/SidRoberts/container.svg?style=for-the-badge)]()
 
-[![GitHub issues](https://img.shields.io/github/issues-raw/SidRoberts/container.svg?style=for-the-badge)]()
-[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/SidRoberts/container.svg?style=for-the-badge)]()
+[![GitHub issues](https://img.shields.io/github/issues-raw/SidRoberts/container.svg?style=for-the-badge)](https://github.com/SidRoberts/container/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/SidRoberts/container.svg?style=for-the-badge)](https://github.com/SidRoberts/container/pulls)
 
 
 
