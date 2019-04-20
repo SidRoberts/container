@@ -1,23 +1,22 @@
 <?php
 
-namespace Sid\Container\Tests\Unit;
+namespace Tests;
 
-use Codeception\TestCase\Test;
 use Sid\Container\Container;
 
-class ContainerTest extends Test
+class ContainerCest
 {
-    public function testBasic()
+    public function testBasic(UnitTester $I)
     {
         $container = new Container();
 
         $container->add(
-            new \Services\Hello()
+            new \Tests\Services\Hello()
         );
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             "hello",
             $container->get("hello")
         );
@@ -37,26 +36,26 @@ class ContainerTest extends Test
 
 
 
-    public function testInheritance()
+    public function testInheritance(UnitTester $I)
     {
         $container = new Container();
 
         $container->add(
-            new \Services\Hello()
+            new \Tests\Services\Hello()
         );
 
         $container->add(
-            new \Services\InheritsHello()
+            new \Tests\Services\InheritsHello()
         );
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             "hello",
             $container->get("hello")
         );
 
-        $this->assertEquals(
+        $I->assertEquals(
             "hello",
             $container->get("inheritsHello")
         );
@@ -64,17 +63,17 @@ class ContainerTest extends Test
 
 
 
-    public function testServiceWithAParameter()
+    public function testServiceWithAParameter(UnitTester $I)
     {
         $container = new Container();
 
         $container->add(
-            new \Services\Parameter("Sid")
+            new \Tests\Services\Parameter("Sid")
         );
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             "Hello Sid",
             $container->get("parameter")
         );
@@ -82,45 +81,45 @@ class ContainerTest extends Test
 
 
 
-    public function testHas()
+    public function testHas(UnitTester $I)
     {
         $container = new Container();
 
         $container->add(
-            new \Services\Hello()
+            new \Tests\Services\Hello()
         );
 
 
 
-        $this->assertTrue(
+        $I->assertTrue(
             $container->has("hello")
         );
 
-        $this->assertFalse(
+        $I->assertFalse(
             $container->has("doesntExist")
         );
     }
 
 
 
-    public function testSingleton()
+    public function testSingleton(UnitTester $I)
     {
         $container = new Container();
 
         $container->add(
-            new \Services\Incrementer(false)
+            new \Tests\Services\Incrementer(false)
         );
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             0,
             $container->get("incrementer")->getI()
         );
 
         $container->get("incrementer")->increment();
 
-        $this->assertEquals(
+        $I->assertEquals(
             0,
             $container->get("incrementer")->getI()
         );
@@ -128,24 +127,24 @@ class ContainerTest extends Test
 
 
 
-    public function testShared()
+    public function testShared(UnitTester $I)
     {
         $container = new Container();
 
         $container->add(
-            new \Services\Incrementer(true)
+            new \Tests\Services\Incrementer(true)
         );
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             0,
             $container->get("incrementer")->getI()
         );
 
         $container->get("incrementer")->increment();
 
-        $this->assertEquals(
+        $I->assertEquals(
             1,
             $container->get("incrementer")->getI()
         );
@@ -153,7 +152,7 @@ class ContainerTest extends Test
 
 
 
-    public function testRawService()
+    public function testRawService(UnitTester $I)
     {
         $container = new Container();
 
@@ -169,11 +168,11 @@ class ContainerTest extends Test
 
 
 
-        $this->assertTrue(
+        $I->assertTrue(
             $container->has("example")
         );
 
-        $this->assertEquals(
+        $I->assertEquals(
             "hello",
             $container->get("example")
         );
@@ -181,21 +180,21 @@ class ContainerTest extends Test
 
 
 
-    public function testTypeHintedResolver()
+    public function testTypeHintedResolver(UnitTester $I)
     {
         $container = new Container();
 
         $container->add(
-            new \Services\TypeHintedResolver()
+            new \Tests\Services\TypeHintedResolver()
         );
 
         $container->add(
-            new \Services\Parameter("Sid")
+            new \Tests\Services\Parameter("Sid")
         );
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             "The 'parameter' service says: Hello Sid",
             $container->get("typeHintedResolver")
         );

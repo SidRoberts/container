@@ -1,27 +1,26 @@
 <?php
 
-namespace Sid\Container\Tests\Unit;
+namespace Tests;
 
-use Codeception\TestCase\Test;
 use Sid\Container\Container;
 use Sid\Container\Resolver;
 
-class ResolverTest extends Test
+class ResolverCest
 {
-    public function testTypehintClass()
+    public function testTypehintClass(UnitTester $I)
     {
         $container = new Container();
 
         $container->add(
-            new \Services\Hello()
+            new \Tests\Services\Hello()
         );
 
         $container->add(
-            new \Services\Parameter("Sid")
+            new \Tests\Services\Parameter("Sid")
         );
 
         $container->add(
-            new \Services\Incrementer(true)
+            new \Tests\Services\Incrementer(true)
         );
 
 
@@ -31,22 +30,22 @@ class ResolverTest extends Test
 
 
         $typehintedClass = $resolver->typehintClass(
-            \ResolvableClass::class
+            \Tests\ResolvableClass::class
         );
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             "hello",
             $typehintedClass->hello
         );
 
-        $this->assertEquals(
+        $I->assertEquals(
             "Hello Sid",
             $typehintedClass->parameter
         );
 
-        $this->assertEquals(
+        $I->assertEquals(
             0,
             $typehintedClass->incrementer->getI()
         );

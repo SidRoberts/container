@@ -1,8 +1,10 @@
 <?php
 
-namespace Services;
+namespace Tests\Services;
 
-class TypeHintedResolver extends \Sid\Container\Service
+use Sid\Container\Service;
+
+class TypeHintedResolver extends Service
 {
     public function getName() : string
     {

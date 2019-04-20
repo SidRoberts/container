@@ -1,10 +1,11 @@
 <?php
 
-namespace Services;
+namespace Tests\Services;
 
 use Sid\Container\Container;
+use Sid\Container\Service;
 
-class InheritsHello extends \Sid\Container\Service
+class InheritsHello extends Service
 {
     public function getName() : string
     {

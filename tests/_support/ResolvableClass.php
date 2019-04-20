@@ -1,8 +1,12 @@
 <?php
 
+namespace Tests;
+
+use Tests\Incrementer;
+
 class ResolvableClass
 {
-    public function __construct(string $hello, \Incrementer $incrementer, string $parameter)
+    public function __construct(string $hello, Incrementer $incrementer, string $parameter)
     {
         $this->hello       = $hello;
         $this->incrementer = $incrementer;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class Incrementer
 {
     protected $i = 0;

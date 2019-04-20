@@ -1,10 +1,11 @@
 <?php
 
-namespace Services;
+namespace Tests\Services;
 
 use Sid\Container\Container;
+use Sid\Container\Service;
 
-class Incrementer extends \Sid\Container\Service
+class Incrementer extends Service
 {
     protected $isShared;
 
@@ -29,7 +30,7 @@ class Incrementer extends \Sid\Container\Service
 
     public function resolve()
     {
-        $incrementer = new \Incrementer();
+        $incrementer = new \Tests\Incrementer();
 
         return $incrementer;
     }

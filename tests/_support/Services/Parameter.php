@@ -1,10 +1,11 @@
 <?php
 
-namespace Services;
+namespace Tests\Services;
 
 use Sid\Container\Container;
+use Sid\Container\Service;
 
-class Parameter extends \Sid\Container\Service
+class Parameter extends Service
 {
     protected $name;
 
