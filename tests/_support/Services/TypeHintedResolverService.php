@@ -2,14 +2,13 @@
 
 namespace Tests\Services;
 
-use Sid\Container\Container;
 use Sid\Container\Service;
 
-class Hello extends Service
+class TypeHintedResolverService extends Service
 {
     public function getName() : string
     {
-        return "hello";
+        return "typeHintedResolver";
     }
 
     public function isShared() : bool
@@ -17,8 +16,8 @@ class Hello extends Service
         return true;
     }
 
-    public function resolve()
+    public function resolve(string $parameter)
     {
-        return "hello";
+        return "The 'parameter' service says: " . $parameter;
     }
 }

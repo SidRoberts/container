@@ -5,22 +5,11 @@ namespace Tests\Services;
 use Sid\Container\Container;
 use Sid\Container\Service;
 
-class Parameter extends Service
+class HelloService extends Service
 {
-    protected $name;
-
-
-
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-    }
-
-
-
     public function getName() : string
     {
-        return "parameter";
+        return "hello";
     }
 
     public function isShared() : bool
@@ -30,6 +19,6 @@ class Parameter extends Service
 
     public function resolve()
     {
-        return "Hello " . $this->name;
+        return "hello";
     }
 }

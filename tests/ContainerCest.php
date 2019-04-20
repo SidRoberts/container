@@ -3,6 +3,13 @@
 namespace Tests;
 
 use Sid\Container\Container;
+use Sid\Container\RawService;
+use Sid\Container\Exception\ServiceNotFoundException;
+use Tests\Services\HelloService;
+use Tests\Services\IncrementerService;
+use Tests\Services\InheritsHelloService;
+use Tests\Services\ParameterService;
+use Tests\Services\TypeHintedResolverService;
 
 class ContainerCest
 {
@@ -11,7 +18,7 @@ class ContainerCest
         $container = new Container();
 
         $container->add(
-            new \Tests\Services\Hello()
+            new HelloService()
         );
 
 
@@ -24,14 +31,16 @@ class ContainerCest
 
 
 
-    /**
-     * @expectedException Sid\Container\Exception\ServiceNotFoundException
-     */
-    public function testServiceDoesntExist()
+    public function testServiceDoesntExist(UnitTester $I)
     {
         $container = new Container();
 
-        $container->get("serviceThatDoesntExist");
+        $I->expectException(
+            ServiceNotFoundException::class,
+            function () use ($container) {
+                $container->get("serviceThatDoesntExist");
+            }
+        );
     }
 
 
@@ -41,11 +50,11 @@ class ContainerCest
         $container = new Container();
 
         $container->add(
-            new \Tests\Services\Hello()
+            new HelloService()
         );
 
         $container->add(
-            new \Tests\Services\InheritsHello()
+            new InheritsHelloService()
         );
 
 
@@ -68,7 +77,7 @@ class ContainerCest
         $container = new Container();
 
         $container->add(
-            new \Tests\Services\Parameter("Sid")
+            new ParameterService("Sid")
         );
 
 
@@ -86,7 +95,7 @@ class ContainerCest
         $container = new Container();
 
         $container->add(
-            new \Tests\Services\Hello()
+            new HelloService()
         );
 
 
@@ -107,7 +116,7 @@ class ContainerCest
         $container = new Container();
 
         $container->add(
-            new \Tests\Services\Incrementer(false)
+            new IncrementerService(false)
         );
 
 
@@ -132,7 +141,7 @@ class ContainerCest
         $container = new Container();
 
         $container->add(
-            new \Tests\Services\Incrementer(true)
+            new IncrementerService(true)
         );
 
 
@@ -157,7 +166,7 @@ class ContainerCest
         $container = new Container();
 
         $container->add(
-            new \Sid\Container\RawService(
+            new RawService(
                 "example",
                 true,
                 function (Container $container) {
@@ -185,11 +194,11 @@ class ContainerCest
         $container = new Container();
 
         $container->add(
-            new \Tests\Services\TypeHintedResolver()
+            new TypeHintedResolverService()
         );
 
         $container->add(
-            new \Tests\Services\Parameter("Sid")
+            new ParameterService("Sid")
         );
 
 

@@ -5,7 +5,7 @@ namespace Tests\Services;
 use Sid\Container\Container;
 use Sid\Container\Service;
 
-class Incrementer extends Service
+class IncrementerService extends Service
 {
     protected $isShared;
 

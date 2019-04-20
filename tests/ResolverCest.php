@@ -4,6 +4,10 @@ namespace Tests;
 
 use Sid\Container\Container;
 use Sid\Container\Resolver;
+use Tests\ResolvableClass;
+use Tests\Services\HelloService;
+use Tests\Services\IncrementerService;
+use Tests\Services\ParameterService;
 
 class ResolverCest
 {
@@ -12,15 +16,15 @@ class ResolverCest
         $container = new Container();
 
         $container->add(
-            new \Tests\Services\Hello()
+            new HelloService()
         );
 
         $container->add(
-            new \Tests\Services\Parameter("Sid")
+            new ParameterService("Sid")
         );
 
         $container->add(
-            new \Tests\Services\Incrementer(true)
+            new IncrementerService(true)
         );
 
 
@@ -30,7 +34,7 @@ class ResolverCest
 
 
         $typehintedClass = $resolver->typehintClass(
-            \Tests\ResolvableClass::class
+            ResolvableClass::class
         );
 
 

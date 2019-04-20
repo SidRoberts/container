@@ -5,7 +5,7 @@ namespace Tests\Services;
 use Sid\Container\Container;
 use Sid\Container\Service;
 
-class InheritsHello extends Service
+class InheritsHelloService extends Service
 {
     public function getName() : string
     {
