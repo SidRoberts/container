@@ -4,6 +4,7 @@ namespace Tests;
 
 use Sid\Container\Container;
 use Sid\Container\RawService;
+use Sid\Container\Resolver;
 use Sid\Container\Exception\ServiceNotFoundException;
 use Tests\Services\HelloService;
 use Tests\Services\IncrementerService;
@@ -206,6 +207,20 @@ class ContainerCest
         $I->assertEquals(
             "The 'parameter' service says: Hello Sid",
             $container->get("typeHintedResolver")
+        );
+    }
+
+
+
+    public function testGetResolver(UnitTester $I)
+    {
+        $container = new Container();
+
+        $resolver = $container->getResolver();
+
+        $I->assertInstanceOf(
+            Resolver::class,
+            $resolver
         );
     }
 }
