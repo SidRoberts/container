@@ -4,8 +4,6 @@ namespace Tests;
 
 use Sid\Container\Container;
 use Sid\Container\Resolver;
-use Tests\ResolvableClass;
-use Tests\ResolvableClassNoConstructor;
 use Tests\Services\HelloService;
 use Tests\Services\IncrementerService;
 use Tests\Services\ParameterService;

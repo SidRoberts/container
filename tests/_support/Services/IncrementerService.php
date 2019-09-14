@@ -2,7 +2,6 @@
 
 namespace Tests\Services;
 
-use Sid\Container\Container;
 use Sid\Container\Service;
 
 class IncrementerService extends Service

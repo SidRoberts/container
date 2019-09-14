@@ -2,9 +2,6 @@
 
 namespace Sid\Container;
 
-use ReflectionClass;
-use ReflectionMethod;
-
 use Sid\Container\Exception\ServiceNotFoundException;
 
 class Container

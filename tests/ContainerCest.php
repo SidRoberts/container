@@ -3,9 +3,9 @@
 namespace Tests;
 
 use Sid\Container\Container;
+use Sid\Container\Exception\ServiceNotFoundException;
 use Sid\Container\RawService;
 use Sid\Container\Resolver;
-use Sid\Container\Exception\ServiceNotFoundException;
 use Tests\Services\HelloService;
 use Tests\Services\IncrementerService;
 use Tests\Services\InheritsHelloService;
