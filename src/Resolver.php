@@ -49,7 +49,7 @@ class Resolver
         return call_user_func_array(
             [
                 $class,
-                $method
+                $method,
             ],
             $params
         );
