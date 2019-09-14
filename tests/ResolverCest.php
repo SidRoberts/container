@@ -5,6 +5,7 @@ namespace Tests;
 use Sid\Container\Container;
 use Sid\Container\Resolver;
 use Tests\ResolvableClass;
+use Tests\ResolvableClassNoConstructor;
 use Tests\Services\HelloService;
 use Tests\Services\IncrementerService;
 use Tests\Services\ParameterService;
@@ -52,6 +53,26 @@ class ResolverCest
         $I->assertEquals(
             0,
             $typehintedClass->incrementer->getI()
+        );
+    }
+
+    public function testTypehintClassNoConstructor(UnitTester $I)
+    {
+        $container = new Container();
+
+        $resolver = new Resolver($container);
+
+
+
+        $typehintedClass = $resolver->typehintClass(
+            ResolvableClassNoConstructor::class
+        );
+
+
+
+        $I->assertInstanceOf(
+            ResolvableClassNoConstructor::class,
+            $typehintedClass
         );
     }
 }
