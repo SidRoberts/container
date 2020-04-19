@@ -36,7 +36,7 @@ class ContainerCest
     {
         $container = new Container();
 
-        $I->expectException(
+        $I->expectThrowable(
             ServiceNotFoundException::class,
             function () use ($container) {
                 $container->get("serviceThatDoesntExist");
